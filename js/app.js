@@ -63,8 +63,8 @@ function saveState() {
    SCORING
    ============================================================ */
 
-function sumMilestones(milestones, selectedMarks, cap) {
-  const total = selectedMarks.reduce((acc, m) => acc + m, 0);
+function sumMilestones(milestones, selectedIndexes, cap) {
+  const total = selectedIndexes.reduce((acc, idx) => acc + milestones[idx].mark, 0);
   return Math.min(total, cap);
 }
 
@@ -217,9 +217,9 @@ function renderSingleTrack(milestones, selectedIdxOrMark, name) {
   return milestones.map((m, idx) => milestoneOptionHtml(m, idx, selectedIdxOrMark === m.mark, "radio", name)).join("");
 }
 
-function renderMultiTrack(milestones, selectedMarks, name) {
+function renderMultiTrack(milestones, selectedIndexes, name) {
   return milestones.map((m, idx) =>
-    milestoneOptionHtml(m, idx, selectedMarks.includes(m.mark), "checkbox", name)
+    milestoneOptionHtml(m, idx, selectedIndexes.includes(idx), "checkbox", name)
   ).join("");
 }
 
@@ -320,7 +320,7 @@ function saveParamModal(param) {
     const group = paramModalContent.querySelector(groupSelector);
     const checked = [...group.querySelectorAll("input:checked")];
     if (mode === "multi") {
-      return checked.map(inp => milestones[parseInt(inp.value)].mark);
+            return checked.map(inp => parseInt(inp.value));
     }
     return checked.length ? milestones[parseInt(checked[0].value)].mark : null;
   }
