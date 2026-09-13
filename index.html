@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Readiness — Placement Tracker</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="app-header">
+  <div class="brand">
+    <span class="brand-mark"></span>
+    <h1>Readiness</h1>
+    <span>your placement passport</span>
+  </div>
+  <nav class="tabs">
+    <button class="tab-btn active" data-view="dashboard">Dashboard</button>
+    <button class="tab-btn" data-view="parameters">Parameters</button>
+    <button class="tab-btn" data-view="activities">Activities</button>
+    <button class="tab-btn" data-view="profiles">Coding Profiles</button>
+    <button class="tab-btn" data-view="passport">Passport</button>
+    <button class="tab-btn" data-view="backup">Backup &amp; Share</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- DASHBOARD -->
+  <section id="view-dashboard" class="view active">
+    <div class="hero">
+      <div>
+        <div class="hero-score" id="heroScore">0<sup>/ 250</sup></div>
+        <div class="hero-level" id="heroLevel">Not Eligible</div>
+        <div class="hero-warning" id="heroWarning" style="display:none;"></div>
+      </div>
+        <div class="batch-select">
+        Batch<br><b>2025–29</b>
+        </div>
+    </div>
+
+    <div class="gate-row">
+      <div class="gate-chip">Coding Assessment <br><b id="chipCoding">0</b> / 20</div>
+      <div class="gate-chip">GATE Core <br><b id="chipGate">0</b> / 25</div>
+      <div class="gate-chip">Parameters active <br><b id="chipActive">0</b> / 12</div>
+    </div>
+
+    <div class="param-list" id="dashboardParamList"></div>
+  </section>
+
+  <!-- PARAMETERS (same as dashboard list but full detail, reused) -->
+  <section id="view-parameters" class="view">
+    <div class="section-head">
+      <h2>All 12 Parameters</h2>
+    </div>
+    <div class="param-list" id="parametersFullList"></div>
+  </section>
+
+  <!-- ACTIVITIES -->
+  <section id="view-activities" class="view">
+    <div class="section-head">
+      <h2>Activities</h2>
+      <button class="btn-primary" id="addActivityBtn">+ Add activity</button>
+    </div>
+    <div class="card-grid" id="activityList"></div>
+  </section>
+
+  <!-- CODING PROFILES -->
+  <section id="view-profiles" class="view">
+    <div class="section-head">
+      <h2>Coding Profiles</h2>
+    </div>
+    <div class="card-grid" id="profileList"></div>
+  </section>
+
+  <!-- PASSPORT (matches mentor's official table) -->
+  <section id="view-passport" class="view">
+    <div class="section-head">
+      <h2>Achievement Passport</h2>
+      <button class="btn-secondary" id="exportPdfBtn">Export as text summary</button>
+    </div>
+    <table class="passport">
+      <thead>
+        <tr><th>No.</th><th>Parameter</th><th>Max</th><th>Awarded</th><th>Evidence</th><th>Status</th></tr>
+      </thead>
+      <tbody id="passportBody"></tbody>
+    </table>
+  </section>
+
+  <!-- BACKUP -->
+  <section id="view-backup" class="view">
+    <div class="backup-box">
+      <h3>Export your data</h3>
+      <p>Download everything as a .json file. Keep this safe — localStorage can be cleared if your browser cache is wiped.</p>
+      <button class="btn-primary" id="exportJsonBtn">Download backup (.json)</button>
+    </div>
+    <div class="backup-box">
+      <h3>Import a backup</h3>
+      <p>Restore from a previously downloaded .json file. This replaces your current data.</p>
+      <input type="file" id="importFile" accept="application/json" />
+    </div>
+    <div class="backup-box">
+      <h3>Publish snapshot for your mentor</h3>
+      <p>Since this is a local-only app for now, "publishing" saves a snapshot file you can email or share — no live sync yet. (Upgrade to a shared live link once you add a backend.)</p>
+      <button class="btn-secondary" id="publishBtn">Download mentor snapshot</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- Parameter detail modal -->
+<div class="modal-backdrop" id="paramModalBackdrop">
+  <div class="modal" id="paramModalContent"></div>
+</div>
+
+<!-- Activity add/edit modal -->
+<div class="modal-backdrop" id="activityModalBackdrop">
+  <div class="modal" id="activityModalContent"></div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
